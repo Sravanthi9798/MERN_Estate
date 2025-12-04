@@ -4,6 +4,7 @@ import { config } from 'dotenv';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
+import productRouter from './routes/product.route.js';
 config();
 
 connect(process.env.MONGO_DB).then(()=>{
@@ -31,10 +32,11 @@ app.get('/test',(req,res)=>{
     })
 });
 
-// app.use("/api/user",userRouter)
 app.use("/api/auth",authRouter);
 
 app.use("/api/user",userRouter);
+
+app.use("/api/products",productRouter)
 
 app.use((err,req,res,next)=>{
 const statusCode=err.statusCode||500;
